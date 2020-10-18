@@ -20,7 +20,7 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        page-size="4"
+        :page-size=pageRowCount
         :total=total
         @current-change="pageno">
       </el-pagination>
@@ -37,7 +37,7 @@
     methods:{
       pageno(currentPage) {
         const _this = this
-        axios.get('http://localhost:8181/person/findAllPage/'+ currentPage +'/4').then(function (resp) {
+        axios.get('http://localhost:8181/person/findAllPage/'+ currentPage +'/' + this.pageRowCount ).then(function (resp) {
           console.log(resp)
           _this.persons = resp.data.content
           _this.total = resp.data.totalElements
@@ -47,7 +47,7 @@
     },
     data() {
       return {
-        size:4,
+        pageRowCount: 4,
         total: 100,
         persons: [{
           pid: 1,
@@ -60,8 +60,8 @@
     created() {
       const _this = this
       // eslint-disable-next-line no-undef
-      axios.get('http://localhost:8181/person/findAllPage/1/4').then(function (resp) {
-        console.log(resp)
+      axios.get('http://localhost:8181/person/findAllPage/1/'+ this.pageRowCount ).then(function (resp) {
+
         _this.persons = resp.data.content
         _this.total = resp.data.totalElements
       })
