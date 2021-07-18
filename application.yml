@@ -8,8 +8,6 @@ spring:
   application:
     name: springcloud-config-prod
 
-
-
 ---
 spring:
   profiles: dev
